@@ -55,6 +55,12 @@ resource "aws_route_table" "shibnath_vpc_public_route_table" {
     Name = var.public_route_table_tag
   }
 }
+resource "aws_route" "shibnath_vpc_public_internet_gateway" {
+  route_table_id         = aws_route_table.shibnath_vpc_public_route_table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.shibnath_IGW.id
+}
+
 ################################################################################
 # Database route table
 ################################################################################
@@ -111,6 +117,11 @@ resource "aws_security_group" "sg" {
       self             = null
     }
   ]
+
+  tags = {
+    Name = "shibnath_vpc_security_group"
+  }
+}
 
   tags = {
     Name = "shibnath_vpc_security_group"
