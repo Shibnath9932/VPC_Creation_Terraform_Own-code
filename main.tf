@@ -122,8 +122,3 @@ resource "aws_security_group" "sg" {
     Name = "shibnath_vpc_security_group"
   }
 }
-
-  tags = {
-    Name = "shibnath_vpc_security_group"
-  }
-}
